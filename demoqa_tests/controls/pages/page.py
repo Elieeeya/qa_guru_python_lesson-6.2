@@ -1,7 +1,7 @@
 from selene.support.shared import browser
 from demoqa_tests.controls.datepicker import Date_picker
 from demoqa_tests.controls.entering_tags import EnteringTags
-from demoqa_tests.controls.absolute_path_file import get_abspath
+from demoqa_tests.utils import get_abspath
 from demoqa_tests.controls.dropdown import Dropdown
 from selene import command
 
