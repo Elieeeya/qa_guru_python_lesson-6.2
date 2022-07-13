@@ -3,11 +3,11 @@ from demoqa_tests.controls.datepicker import Date_picker
 from demoqa_tests.controls.entering_tags import EnteringTags
 from demoqa_tests.utils import get_abspath
 from demoqa_tests.controls.dropdown import Dropdown
+from demoqa_tests.controls.table import Table
 from selene import command
 
 
-
-class Registration_form:
+class RegistrationForm:
 
     def __init__(self):
         self.user_city = 'Panipat'
@@ -16,7 +16,6 @@ class Registration_form:
         self.user_b_day = 18
         self.user_b_month = 9
         self.user_b_year = 1993
-
 
     def set_first_name(self, param):
         browser.element('#firstName').type('TestName')
@@ -73,7 +72,6 @@ class Registration_form:
         Dropdown(browser.element('#city')).autocomplete(option='Panipat')
         return self
 
-    @staticmethod
-    def submit_form():
+    def submit_form(self):
         browser.element('#submit').perform(command.js.click)
 
