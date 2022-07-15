@@ -10,31 +10,29 @@ from selene import command
 class RegistrationForm:
 
     def __init__(self):
-        self.user_city = 'Panipat'
-        self.user_state = 'Haryana'
         self.user_hobbi = 'Sports', 'Music'
         self.user_b_day = 18
         self.user_b_month = 9
         self.user_b_year = 1993
 
     def set_first_name(self, param):
-        browser.element('#firstName').type('TestName')
+        browser.element('#firstName').type(param)
         return self
 
     def set_last_name(self, param):
-        browser.element('#lastName').type('TestSurname')
+        browser.element('#lastName').type(param)
         return self
 
     def set_user_email(self, param):
-        browser.element('#userEmail').type('test_email@ya.ru')
+        browser.element('#userEmail').type(param)
         return self
 
     def set_gender(self, param):
-        browser.element(f'[name=gender][value=Male]').following_sibling.click()
+        browser.element(f'[name=gender][value=Male]').type(param).following_sibling.click()
         return self
 
     def set_phone_number(self, param):
-        browser.element('#userNumber').type('9208887755')
+        browser.element('#userNumber').type(param)
         return self
 
     def set_birth_day(self):
@@ -50,6 +48,7 @@ class RegistrationForm:
     def set_hobbies(self):
         list_hobbi = {
             'Sports': '[for=hobbies-checkbox-1]',
+            'Reading': '[for=hobbies-checkbox-2]',
             'Music': '[for=hobbies-checkbox-3]'
         }
         for value in self.user_hobbi:
@@ -61,7 +60,7 @@ class RegistrationForm:
         return self
 
     def set_address(self, param):
-        browser.element('#currentAddress').type('Bolshaya Nikitskaya st., 22k2, Moscow, 121099')
+        browser.element('#currentAddress').type(param)
         return self
 
     def set_state(self):
@@ -74,4 +73,3 @@ class RegistrationForm:
 
     def submit_form(self):
         browser.element('#submit').perform(command.js.click)
-

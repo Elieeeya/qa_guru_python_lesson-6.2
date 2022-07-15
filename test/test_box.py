@@ -1,4 +1,5 @@
 from demoqa_tests.application_manager import app
+from demoqa_tests.page import RegistrationForm
 from selene.support.shared import browser
 
 
@@ -9,7 +10,7 @@ def test_student_registration_form():
      .set_first_name('TestName')
      .set_last_name('TestSurname')
      .set_user_email('test_email@ya.ru')
-     .set_gender('[for="gender-radio-1"]')
+     .set_gender('Male')
      .set_phone_number('9208887755')
      .set_birth_day()
      .set_subjects('Economics', 'English', 'Arts')
