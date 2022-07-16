@@ -4,16 +4,13 @@ from demoqa_tests.controls.entering_tags import EnteringTags
 from demoqa_tests.utils import get_abspath
 from demoqa_tests.controls.dropdown import Dropdown
 from demoqa_tests.controls.table import Table
-from selene import command
+from selene import command, have
 
 
 class RegistrationForm:
-
     def __init__(self):
-        self.user_hobbi = 'Sports', 'Music'
-        self.user_b_day = 18
-        self.user_b_month = 9
-        self.user_b_year = 1993
+        self.birth_date = Date_picker(browser.element('#dateOfBirthInput'))
+
 
     def set_first_name(self, param):
         browser.element('#firstName').type(param)
@@ -28,16 +25,15 @@ class RegistrationForm:
         return self
 
     def set_gender(self, param):
-        browser.element(f'[name=gender][value=Male]').type(param).following_sibling.click()
+        browser.element('#genterWrapper').all('.custom-radio').element_by(have.exact_text(param)).click()
         return self
 
     def set_phone_number(self, param):
         browser.element('#userNumber').type(param)
         return self
 
-    def set_birth_day(self):
-        Date_picker(browser.element('#dateOfBirthInput'), self.user_b_year, self.user_b_month,
-                    self.user_b_day).set_date_by_clicks()
+    def set_birth_date(self, birth_date):
+        self.birth_date.add(birth_date)
         return self
 
     def set_subjects(self, *names):
@@ -45,30 +41,30 @@ class RegistrationForm:
             EnteringTags(browser.element('#subjectsInput')).add(name)
         return self
 
-    def set_hobbies(self):
+    def set_hobbies(self, *values):
         list_hobbi = {
             'Sports': '[for=hobbies-checkbox-1]',
             'Reading': '[for=hobbies-checkbox-2]',
             'Music': '[for=hobbies-checkbox-3]'
         }
-        for value in self.user_hobbi:
+        for value in values:
             browser.element(list_hobbi[value]).click()
         return self
 
-    def set_picture(self):
-        browser.element('#uploadPicture').send_keys(get_abspath('l8xMcQXMrRqEv1GdFVdPCD6a9zP.jpg'))
+    def set_picture(self, image):
+        browser.element('#uploadPicture').send_keys(get_abspath(image))
         return self
 
     def set_address(self, param):
         browser.element('#currentAddress').type(param)
         return self
 
-    def set_state(self):
-        Dropdown(browser.element('#state')).select(option='Haryana')
+    def set_state(self, state_name):
+        Dropdown(browser.element('#state')).select(option=state_name)
         return self
 
-    def set_city(self):
-        Dropdown(browser.element('#city')).autocomplete(option='Panipat')
+    def set_city(self, city_name):
+        Dropdown(browser.element('#city')).autocomplete(option=city_name)
         return self
 
     def submit_form(self):
